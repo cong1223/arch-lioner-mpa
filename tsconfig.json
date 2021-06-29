@@ -1,0 +1,61 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "preserve", // 不能设置为react
+    "jsxFactory": "Taro.createElement",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "global.d.ts"
+    ],
+    "paths": {
+      "@tarojs/shared": [
+        "packages/shared/src"
+      ],
+      "@tarojs/taro": [
+        "packages/taro/types/index.d.ts"
+      ],
+      "@tarojs/runtime": [
+        "packages/taro-runtime/src"
+      ],
+      "@dom": [
+        "packages/taro-runtime/src/dom"
+      ],
+      "@tarojs/components": [
+        "packages/taro-components/types"
+      ],
+      "@/components": ["./src/components/*"],
+      "@/utils": ["./src/utils/*"],
+      "@/assets": ["./src/assets/*"]
+    }
+  },
+  "include": [
+    "packages/global.d.ts",
+    "packages/*/src"
+  ],
+  "exclude": [
+    "__tests__",
+    "node_modules",
+    "dist",
+    "tests",
+    "jest",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
+  "compileOnSave": false
+}
