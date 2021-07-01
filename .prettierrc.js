@@ -7,6 +7,6 @@ module.exports = {
   eslintIntegration: false, // 不让prettier使用eslint的代码格式进行校验
   tslintIntegration: false, // 不让prettier使用tslint的代码格式进行校验
   // printWidth: 60, //长度60以外换行
-  jsxSingleQuote: true, // jsx使用双引号
+  jsxSingleQuote: false, // jsx使用双引号
   htmlWhitespaceSensitivity: 'ignore' // html中空格被认为不敏感的
 };

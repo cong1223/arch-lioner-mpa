@@ -1,5 +1,6 @@
-import 'taro-ui/dist/style/index.scss';
 import { ReactNode } from 'react';
+import 'taro-ui/dist/style/index.scss';
+import './index.scss';
 import './assets/theme/custom-theme.scss';
 import './assets/theme/taro-ui.css';
 

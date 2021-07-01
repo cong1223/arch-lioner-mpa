@@ -44,10 +44,6 @@
       "@/assets": ["./src/assets/*"]
     }
   },
-  "include": [
-    "packages/global.d.ts",
-    "packages/*/src"
-  ],
   "exclude": [
     "__tests__",
     "node_modules",
