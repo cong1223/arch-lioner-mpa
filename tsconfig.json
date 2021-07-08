@@ -9,8 +9,8 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "outDir": "lib",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false, // 申明但是未使用
+    "noUnusedParameters": false,
     "strictNullChecks": true,
     "sourceMap": true,
     "baseUrl": ".",
