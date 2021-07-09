@@ -3,6 +3,7 @@ import { Button } from '@tarojs/components';
 import { useState, FC, forwardRef, useImperativeHandle } from 'react';
 import Taro from '@tarojs/taro';
 import UserService from '../../services/UserService';
+import Keys from '../../constants/StorageConstants';
 
 const AuthModal: FC<any> = forwardRef((props, ref) => {
   const [isOpened, setIsOpened] = useState(false);
@@ -21,12 +22,13 @@ const AuthModal: FC<any> = forwardRef((props, ref) => {
             success: function(userInfoRes) {
               const { encryptedData, iv } = userInfoRes;
               UserService.getToken({encryptedData, iv, code}).then(res => {
-                console.log('11111', res);
-                // Taro.setStorageSync('accessToken', data.result.accessToken); // 保存accessToken
-                // Taro.setStorageSync(
-                //   'user',
-                //   JSON.stringify(res.result.user)
-                // );
+                const { result } = res;
+                Taro.setStorageSync(Keys.accessToken, result.accessToken); // 保存accessToken
+                Taro.setStorageSync(
+                  Keys.user,
+                  JSON.stringify(result.user)
+                );
+                setIsOpened(false);
               })
             }
           })

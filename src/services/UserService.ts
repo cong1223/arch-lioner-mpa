@@ -6,6 +6,9 @@ class UserService extends BaseService {
     super();
   }
 
+  /**
+   * 获取token
+   */
   getToken(params: IGetTokenParams) {
     return this.output<getTokenRes>(
       this.request.post<IGetTokenParams, getTokenRes>(

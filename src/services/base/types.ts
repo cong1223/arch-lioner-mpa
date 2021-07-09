@@ -8,15 +8,15 @@ export interface Header {
   setCookie: string;
 }
 
-export interface TaroResponse<R> {
-  data: Result<R>;
+export interface ITaroRequestResponse<R> {
+  data: IServiceResponse<R>;
   header: Header;
   statusCode: number;
   cookies: string[];
   errMsg: string;
 }
 
-export interface Result<R> {
+export interface IServiceResponse<R> {
   code: number;
   message: string;
   result: R;

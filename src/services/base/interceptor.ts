@@ -32,7 +32,6 @@ export const interceptor = (chain: Chain) => {
           data: any;
         }>
       ) => {
-        console.log('data->', res);
         reduceRequest();
         // 先判断http请求状态码
         if (res.statusCode === HTTP_STATUS.NOT_FOUND) {
@@ -66,7 +65,6 @@ export const interceptor = (chain: Chain) => {
 const errShowToast = (message: string) => {
   isHideLoading();
   if (TIME) {
-    console.log('clearTimeout->');
     REQUEST_NUM -= 1;
     clearTimeout(TIME);
     TIME = null;
@@ -83,34 +81,28 @@ const errShowToast = (message: string) => {
 
 const isHideLoading = () => {
   if (REQUEST_NUM > 0) {
-    console.log('toast之前隐藏loading');
-    // Taro.hideLoading();
+    Taro.hideLoading();
   }
 };
 
 const isShowLoading = () => {
   if (REQUEST_NUM > 0) {
-    console.log('再次开始loading');
-    // Taro.showLoading();
+    Taro.showLoading();
   }
 };
 
 const increaseRequest = () => {
   if (REQUEST_NUM === 0) {
-    console.log('开始loading');
-    // Taro.showLoading();
+    Taro.showLoading();
   }
   REQUEST_NUM += 1;
-  console.log('REQUEST_NUM->', REQUEST_NUM);
 };
 
 const reduceRequest = () => {
   TIME = setTimeout(() => {
     REQUEST_NUM -= 1;
-    console.log('REQUEST_NUM->', REQUEST_NUM);
     if (REQUEST_NUM === 0) {
-      console.log('结束loading');
-      // Taro.hideLoading();
+      Taro.hideLoading();
     }
   }, 300);
 };

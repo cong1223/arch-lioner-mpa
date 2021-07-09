@@ -1,6 +1,6 @@
 import request, { IRequest } from './request';
 import urls, { IUrls } from '../../config/uri';
-import { TaroResponse } from './types';
+import { IServiceResponse } from './types';
 import Taro from '@tarojs/taro';
 
 class BaseService {
@@ -10,15 +10,13 @@ class BaseService {
     this.request = request;
     this.urls = urls;
   }
-  static output<R>(promise: Taro.RequestTask<R>, isTotal = false) {
-    return new Promise<R>((resolve, reject) => {
+  output<R>(promise: Taro.RequestTask<R>) {
+    return new Promise<IServiceResponse<R>>((resolve, reject) => {
       promise.then(
-        (resp: Taro.request.SuccessCallbackResult ) => {
-          console.log('====', resp.data)
-        },
-        // (resp: TaroResponse<R>) => {
-        //   reject(resp.data);
-        // }
+        // @ts-ignore
+        (resp: Taro.request.SuccessCallbackResult<IServiceResponse<R>>) => {
+          resolve(resp.data)
+        }
       );
     });
   }
