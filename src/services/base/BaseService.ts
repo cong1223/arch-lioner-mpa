@@ -15,7 +15,11 @@ class BaseService {
       promise.then(
         // @ts-ignore
         (resp: Taro.request.SuccessCallbackResult<IServiceResponse<R>>) => {
-          resolve(resp.data)
+          if (resp.data.code === 200) {
+            resolve(resp.data);
+          } else {
+            reject(resp.data);
+          }
         }
       );
     });

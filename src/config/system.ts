@@ -1,47 +1,17 @@
-import { shell, MenuItemConstructorOptions } from 'electron';
+import Taro from '@tarojs/taro';
 
-const Signature = 'com.archlioner';
-const Menus: MenuItemConstructorOptions[] = [
-  {
-    // 对于 OSX 而言，应用菜单的第一个菜单项是应用程序的名字
-    label: '营造狮',
-    submenu: [
-      {
-        label: '网页版',
-        role: 'help',
-        submenu: [
-          {
-            label: '网页版',
-            click: function() {
-              shell.openExternal('https://www.archlioner.com');
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: '窗口',
-    submenu: [
-      {
-        label: '退出',
-        role: 'quit',
-        accelerator: 'CmdOrCtrl+Q'
-      },
-      {
-        label: '控制台',
-        role: 'toggleDevTools',
-        accelerator: 'F12'
-      },
-      {
-        label: '重新加载',
-        role: 'reload',
-        accelerator: 'CmdOrCtrl+R'
-      }
-    ]
-  }
-];
-export {
-  Signature,
-  Menus
-};
+const accountInfo = Taro.getAccountInfoSync();
+const MPA_APP_ID = accountInfo.miniProgram.appId;
+const HZZK_APPID = 'wxe0e42f96b5ec7550';
+const TEST_APPID = 'wxc36af02e952e4da6';
+let DOMAIN;
+if (MPA_APP_ID === HZZK_APPID) {
+  DOMAIN="https://archlioner.com";
+} else {
+  DOMAIN="https://dev.archlioner.com";
+}
+export default {
+  HZZK_APPID, // 正式服appid
+  TEST_APPID, // 测试服(智库信息)appid
+  DOMAIN
+}

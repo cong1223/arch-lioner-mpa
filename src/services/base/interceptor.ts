@@ -52,7 +52,7 @@ export const interceptor = (chain: Chain) => {
         } else {
           errShowToast('statusError->服务器错误，请稍后重试');
         }
-        return errorData;
+        return res;
       }
     )
     .catch(() => {

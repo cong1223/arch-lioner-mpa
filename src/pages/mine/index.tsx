@@ -9,11 +9,19 @@ import shareIcon from '@/assets/image/mine/icon_share.png';
 import defaultAvatar from '@/assets/image/mine/default-avatar.png';
 import AuthModal from '../../components/AuthModal';
 import { IGlobalRef } from '../../model/global';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers';
 
 const Mine: FC = () => {
+  const loginPromiseFunc = useSelector(
+    (state: RootState) => state.globalReducer.loginPromise
+  );
+  const userInfo = useSelector(
+    (state: RootState) => state.userReducer.userInfo
+  );
   const [currentEnt] = useState<string>('中国美术学院风景建筑设计研究院');
   const [enterpriseList] = useState(['中国美术学院风景建筑设计研究院']);
-  const [isBind] = useState(false);
+  const [isBind, setIsBind] = useState(false);
   const authModalRef = useRef() as MutableRefObject<IGlobalRef>;
   const onEntChange = e => {
     console.log('ent changed', e);
@@ -21,6 +29,11 @@ const Mine: FC = () => {
   const handleClick = () => {
     console.log('handleClick');
   };
+
+  loginPromiseFunc.then(bind => {
+    setIsBind(bind);
+  });
+
   return (
     <View className="page-container">
       <AuthModal ref={authModalRef} />
@@ -32,7 +45,7 @@ const Mine: FC = () => {
               className="avatar"
               image="https://storage.360buyimg.com/mtd/home/111543234387022.jpg"
             />
-            <Text className="user-name">高姿态</Text>
+            <Text className="user-name">{userInfo?.realname}</Text>
             <Text className="enterprise-name">{currentEnt}</Text>
             <Picker
               mode="selector"
@@ -45,7 +58,10 @@ const Mine: FC = () => {
         ) : (
           <>
             <AtAvatar circle className="avatar" image={defaultAvatar} />
-            <View className="login-tip" onClick={() => authModalRef.current.open()}>
+            <View
+              className="login-tip"
+              onClick={() => authModalRef.current.open()}
+            >
               Hi~,您还没有登录,<Text>点击登录</Text>
             </View>
           </>

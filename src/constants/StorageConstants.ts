@@ -1,9 +1,15 @@
 /**
  * @description storage keys
  */
-enum Keys {
-  user = 'user', /* 用户信息 */
-  accessToken = 'accessToken', /* token */
+enum StorageKeys {
+  /**
+   * 用户信息
+   */
+  user = 'user',
+  /**
+   * token
+   */
+  accessToken = 'accessToken',
 }
 
-export default Keys;
+export default StorageKeys;

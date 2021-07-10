@@ -1,7 +1,9 @@
 import Taro from '@tarojs/taro';
 import { interceptor } from './interceptor';
-import Keys from '../../constants/StorageConstants';
-import { IUser } from '../../model/userEntity';
+import configStore from '../../store';
+
+const store = configStore();
+
 
 Taro.addInterceptor(interceptor);
 
@@ -42,8 +44,8 @@ const create = <T, R>({
   method
 }: options<T>): Taro.RequestTask<R> => {
   const baseHeaderOptions: baseHeaderOptions = { 'X-User-Agent': 'mini' };
-  const token: string = Taro.getStorageSync(Keys.accessToken);
-  const enterpriseId = Taro.getStorageSync(Keys.user) && (JSON.parse(Taro.getStorageSync('user')) as IUser).curEnterpriseId;
+  const token: string = store.getState().userReducer.accessToken;
+  const enterpriseId = store.getState().userReducer.userInfo?.curEnterpriseId;
   if (token) baseHeaderOptions['X-Access-Token'] = token;
   if (enterpriseId) baseHeaderOptions['X-Ent'] = enterpriseId;
   const options = {
