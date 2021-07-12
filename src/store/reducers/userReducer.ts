@@ -1,13 +1,11 @@
 import actionTypes from '../actionTypes';
-import { IUser } from '../../model/userEntity';
+import { UserInfo } from '../../model/api/getUserInfo';
 
 type userReducerState = {
-  userInfo: IUser | null,
-  accessToken: string
+  userInfo: UserInfo | null,
 }
 const init: userReducerState = {
   userInfo: null,
-  accessToken: ''
 };
 export default (state = init, action) => {
   switch (action.type) {
@@ -16,12 +14,6 @@ export default (state = init, action) => {
       return {
         ...state,
         userInfo
-      } as userReducerState;
-    case actionTypes.SET_ACCESS_TOKEN:
-      const { token } = action;
-      return {
-        ...state,
-        token
       } as userReducerState;
     default:
       return state;

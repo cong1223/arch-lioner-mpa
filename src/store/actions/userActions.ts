@@ -1,7 +1,7 @@
 import actionTypes from '../actionTypes';
-import { IUser } from '../../model/userEntity';
+import { UserInfo } from '../../model/api/getUserInfo';
 
-const setUserInfo: any = (userInfo: IUser) => {
+const setUserInfo: any = (userInfo: UserInfo) => {
   return dispatch => {
     dispatch({
       type: actionTypes.SET_USER_INFO,
@@ -10,13 +10,4 @@ const setUserInfo: any = (userInfo: IUser) => {
   };
 };
 
-const setAccessToken: any = (token: string) => {
-  return dispatch => {
-    dispatch({
-      type: actionTypes.SET_ACCESS_TOKEN,
-      token
-    });
-  };
-};
-
-export { setUserInfo, setAccessToken };
+export { setUserInfo };

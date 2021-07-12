@@ -1,4 +1,4 @@
-import { FC, useState, useRef, MutableRefObject } from 'react';
+import { FC, useState, useRef, MutableRefObject, useMemo } from 'react';
 import { View, Text, Picker } from '@tarojs/components';
 import { AtAvatar, AtList, AtListItem } from 'taro-ui';
 import './index.scss';
@@ -13,14 +13,19 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
 
 const Mine: FC = () => {
-  const loginPromiseFunc = useSelector(
-    (state: RootState) => state.globalReducer.loginPromise
+  const loginPromiseFunc: Promise<boolean> = useSelector(
+    (state: RootState) => state.global.loginPromise
   );
   const userInfo = useSelector(
-    (state: RootState) => state.userReducer.userInfo
+    (state: RootState) => state.user.userInfo
   );
-  const [currentEnt] = useState<string>('中国美术学院风景建筑设计研究院');
-  const [enterpriseList] = useState(['中国美术学院风景建筑设计研究院']);
+  const currentEntId = useSelector((state: RootState) => state.enterprise.currentEntId);
+  const enterpriseList = useSelector((state: RootState) => state.enterprise.enterpriseList);
+  const currentEntName = useMemo(() => {
+    return enterpriseList?.find(item => {
+      return item.enterpriseId === currentEntId;
+    })?.enterpriseName;
+  }, [currentEntId]);
   const [isBind, setIsBind] = useState(false);
   const authModalRef = useRef() as MutableRefObject<IGlobalRef>;
   const onEntChange = e => {
@@ -43,13 +48,14 @@ const Mine: FC = () => {
             <AtAvatar
               circle
               className="avatar"
-              image="https://storage.360buyimg.com/mtd/home/111543234387022.jpg"
+              image={userInfo?.avatar}
             />
             <Text className="user-name">{userInfo?.realname}</Text>
-            <Text className="enterprise-name">{currentEnt}</Text>
+            <Text className="enterprise-name">{currentEntName}</Text>
             <Picker
               mode="selector"
               range={enterpriseList}
+              rangeKey="enterpriseName"
               onChange={onEntChange}
             >
               <Text className="change-ent-btn">切换企业</Text>

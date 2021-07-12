@@ -1,4 +1,4 @@
-import { ReactNode, createContext } from 'react';
+import { ReactNode, useEffect } from 'react';
 import 'taro-ui/dist/style/index.scss';
 import './index.scss';
 import Taro from '@tarojs/taro';
@@ -6,7 +6,9 @@ import UserService from './services/UserService';
 import { Provider } from 'react-redux';
 import configStore from './store';
 import { setLoginPromise } from './store/actions/globalActions';
-import { setUserInfo, setAccessToken } from './store/actions/userActions';
+import StorageKeys from './constants/StorageConstants';
+import { setUserInfo } from './store/actions/userActions';
+import { setEnterprise } from './store/actions/enterpriseActions';
 
 const store = configStore();
 
@@ -23,8 +25,16 @@ const loginPromise = (): Promise<boolean> => {
                 .then(res => {
                   resolve(true);
                   const { result } = res;
+                  Taro.setStorageSync(StorageKeys.accessToken, result.accessToken);
+                  Taro.setStorageSync(
+                    StorageKeys.user,
+                    JSON.stringify(result.user)
+                  );
                   store.dispatch(setUserInfo(result.user));
-                  store.dispatch(setAccessToken(result.accessToken));
+                  UserService.getUserInfo().then(userDetailRes => {
+                    const detailRes = userDetailRes.result;
+                    store.dispatch(setEnterprise(detailRes.userEnterpriseVoList));
+                  });
                 })
                 .catch(e => {
                   resolve(false);

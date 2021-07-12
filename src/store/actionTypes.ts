@@ -8,15 +8,15 @@ type ActionTypes = {
    */
   'SET_USER_INFO': string,
   /**
-   * 保存token
+   * 保存当前用户所有企业列表和当前企业id
    */
-  'SET_ACCESS_TOKEN': string
+  'SET_ENTERPRISE': string,
 };
 
 const actionTypes: ActionTypes = {
   SET_LOGIN_PROMISE: 'SET_LOGIN_PROMISE',
   SET_USER_INFO: 'SET_USER_INFO',
-  SET_ACCESS_TOKEN: 'SET_ACCESS_TOKEN'
+  SET_ENTERPRISE: 'SET_ENTERPRISE',
 };
 
 export default actionTypes;

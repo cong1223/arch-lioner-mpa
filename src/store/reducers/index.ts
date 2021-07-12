@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import globalReducer from './globalReducer';
-import userReducer from './userReducer';
+import global from './globalReducer';
+import user from './userReducer';
+import enterprise from './enterpriseReducer';
 
 const reducers = combineReducers({
-  globalReducer,
-  userReducer
+  global,
+  user,
+  enterprise
 });
 export type RootState = ReturnType<typeof reducers>;
 export default reducers;
