@@ -28,6 +28,7 @@ const Mine: FC = () => {
   }, [currentEntId]);
   const [isBind, setIsBind] = useState(false);
   const authModalRef = useRef() as MutableRefObject<IGlobalRef>;
+
   const onEntChange = e => {
     console.log('ent changed', e);
   };

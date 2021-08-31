@@ -5,10 +5,10 @@ export default {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   usingComponents: Object.assign(useGlobalIconFont()),
   pages: [
-    'pages/mine/index',
     'pages/project/index',
     'pages/workflow/index',
     'pages/disk/index',
+    'pages/mine/index',
   ],
   tabBar: {
     color: '#bfbfbf',

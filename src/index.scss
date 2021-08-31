@@ -1,3 +1,31 @@
 View, Text {
   color: #262626;
 }
+.flex {
+  display: flex;
+}
+.single-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.center {
+  @extend .flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  @extend .flex;
+  justify-content: space-between;
+}
+
+.flex-wrap  {
+  @extend .flex;
+  flex-wrap: wrap;
+}
+
+.center-align {
+  @extend .flex;
+  align-items: center;
+}
